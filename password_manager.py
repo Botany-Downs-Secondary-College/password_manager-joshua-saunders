@@ -1,73 +1,91 @@
 #password_manager.py
-#programme that allows the user to store and view passwords
-#Joshua Saunders 23/02/2021
+#Joshua Saunders 25/02/2021
 
-#variables
-name = ""
-age = ""
-#empty password list 
-password_list = []
-
-#list for existing members and store new username
-member_list = ["Wongster", "MokoMan115"]
+#Lists
+password_list = ["Pass1234"]
+username_list = ["BDSC2021"]
 
 
-#Functions  prints out the menu for the user to choose an option and returns user option to the main routine
-def menu(name, age):
+#Functions
+def age():
+  while True:
+    try:
+      age = int(float(input("What is you age: ")))
+      
+      if age < 10: 
+        print("You are not old enough")
+        break
+      elif age >= 13:
+        print("You are old enough please proceed")
+        menu()
+    except ValueError:
+      print("Enter an integer not a word please: ")
 
-  print("Hello ", name)
-  
-  if age < 13:
-    print("Sorry you do not qualified to enter")
-    exit()
 
-  else:
-    mode = input("""Choose a mode by entering the number: 
-    1: Add Passwords 2: View Passwords 3: Exit: """).strip()
-    return mode 
-
-#main routine
-
-print("Welcome to the Password Manager")
-
-name = input("What is your name")
-age = int(input("How old are you?"))
-
-menu()
-def add details():
-while True:
-  #asks the user input and .upper converts the users input to upper case
-  member = input("Enter | L for log in or | N to create a new account: ")
-
-  if member == "L":
-    m_username = input("Enter Username: ")
-    m_password = input("Enter Password: ")
-    if m_username and m_password in member list:
-      print("Log In Successful")
+def menu():
+  while True:
+    options = int(input("1: New User | 2: Existing User | 3: View Username List | 4: View Passwords List: "))
+    if options == 1:
+      add_user()
+      password()
       break
-  elif member == "N":
-    m_username = input("Enter username: ")
-    m_password = input("Create Password with at least 8 characters long, Enter Password: ").strip()
-    
-    member_list.append(m_username, m_password)
-    print("Your account created ")
+    elif options == 2:
+      log_in()
+      break
+    elif options == 3:
+      print(username_list)
+    elif options == 4:
+      print(password_list)
+      
+      break
+    else:
+      print("Please enter a number to the ones shown")
 
-def view_list ():
-  print(member_list)
+def add_user():
+  while True:
 
-while True:
-  chosen_option = menu(name, age)
+    add_user = ("Enter a username to create a user for a new account: ")
+    x = len(add_user)
+    if x >= 5:
+      print("Username is created")
+      username_list.append(add_user)
+      break
+    else:
+      print("Username is too short, it must contain 5 or more letters")
 
-  if chosen_option == "1":
-    add_details()
-
-  elif chosen_option == "2":
-    view_list()
-
-  elif chosen_option == "3":
-    break
+def password():
+  while True:
+    add_password = input("Please enter a password, must be 8 letters or more: ")
+    y = len(add_password)
+    if y >= 10:
+      print("Password length is sufficent")
+      password_list.append(add_password)
+      break
+    else:
+      print("Password is too short please enter one with 8 letters or more")
   
-  else:
-    print("That was no a valid optoin, please try again")
+def log_in():
+  while True:
+    user = input("Are you an existing user? Yes/No: ").lower()
+    if user == "yes":
+      username = input("Username: ")
+    elif user == "no":
+      menu()
+    if username in username_list:
+      password = input("Password: ")
+    if username not in username_list:
+      print("Username not found, we have returned you back to the menu")
+      menu()
+    if password in password_list:
+      add_extra = input("Welcome, Press 1 To View Your Lists, And Press 2 To Add More Passwords: ")
+    elif add_extra == 1:
+      print(username_list)
+      print(password_list)
+      break
+    elif add_extra == 2:
+      add_user()
+      password()
+    else:
+      print("User was not found please try again")
 
-print("Goodbye, thanks for using password manager")
+age()
