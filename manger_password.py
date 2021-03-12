@@ -1,7 +1,6 @@
 #password_manager.py
-#Did you write my code Anson and Alex - Eugene
-# Yes we did - Alex and Anson
-print("Hi, welcome to Eugene's password programme. You must be 10 or over to qualify. ")
+#
+print("Hi, welcome to Eugene's password programme. You must be 13 or over to qualify. ")
 
 password_list = []
 user_list = []
@@ -14,10 +13,10 @@ def age():
   while True:
     try:
       age = int(float(input("What is your age: ")))
-      if age < 10:
+      if age < 13:
         print("You do not qualify")
         exit()
-      elif age >= 1:
+      elif age >= 13:
         print("You qualify and may proceed.")
         break
     except IndexError:
